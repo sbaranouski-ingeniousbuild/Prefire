@@ -10,7 +10,7 @@ struct PrefireTestsPlugin: BuildToolPlugin {
         let configuration = [target.directory, target.directory.removingLastComponent()]
             .compactMap(Configuration.from(rootPath:)).first
 
-        guard let mainTarget = context.package.targets.first(where: { $0.name == configuration?.targetName }) ?? context.package.targets.first else {
+        guard let mainTarget = context.package.targets.first(where: { $0.name == configuration?.targetName }) ?? context.package.targets.last else {
             throw "Prefire cannot find target for testing. Please, use `.prefire.yml` file, for providing `Target Name`"
         }
 

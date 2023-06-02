@@ -21,10 +21,11 @@ extension Configuration {
     private static let fileName = ".prefire.yml"
 
     static func from(rootPath: Path) -> Configuration? {
-        let configPath = rootPath.appending(subpath: Configuration.fileName)
+        let configPath = URL(fileURLWithPath: rootPath.appending(subpath: Configuration.fileName).string)
 
-        guard FileManager.default.fileExists(atPath: configPath.string),
-              let configDataString = URL(string: "file://\(configPath)").flatMap({ try? String(contentsOf: $0, encoding: .utf8) })
+        guard
+            FileManager.default.fileExists(atPath: configPath.path),
+                let configDataString = try? String(contentsOf: configPath, encoding: .utf8)
         else { return nil }
 
         return Configuration(
