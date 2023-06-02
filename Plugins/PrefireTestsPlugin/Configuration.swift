@@ -22,7 +22,8 @@ extension Configuration {
 
     static func from(rootPath: Path) -> Configuration? {
         let configPath = URL(fileURLWithPath: rootPath.appending(subpath: Configuration.fileName).string)
-
+        debugPrint("configPath: \(configPath)")
+        
         guard
             FileManager.default.fileExists(atPath: configPath.path),
                 let configDataString = try? String(contentsOf: configPath, encoding: .utf8)
