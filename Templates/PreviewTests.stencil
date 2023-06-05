@@ -37,7 +37,7 @@ class PreviewTests: XCTestCase {
             let isScreen = preview?.layout == .device
             let device = preview?.device?.snapshotDevice() ?? deviceConfig
 
-            var delay: TimeInterval = 0.0
+            var delay: TimeInterval = 0.5
             var precision: Float = 1.0
 
             // When
