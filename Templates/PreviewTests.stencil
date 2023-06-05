@@ -37,22 +37,50 @@ class PreviewTests: XCTestCase {
             let isScreen = preview?.layout == .device
             let device = preview?.device?.snapshotDevice() ?? deviceConfig
 
+            var delay: TimeInterval = 0.0
+            var precision: Float = 1.0
+
             // When
             var view = view.content
-            view = isScreen ? view : AnyView(view.frame(width: device.size?.width).fixedSize(horizontal: false, vertical: true))
+                .onPreferenceChange(DelayPreferenceKey.self) {
+                    debugPrint("Delay: \($0)")
+                    delay = $0
+                }
+                .onPreferenceChange(PrecisionPreferenceKey.self) {
+                    debugPrint("Precision: \($0)")
+                    precision = $0
+                }
+
+            let matchingView = isScreen ? AnyView(view) : AnyView(view
+                .frame(width: device.size?.width)
+                .fixedSize(horizontal: false, vertical: true)
+            )
 
             // Then
             assertSnapshot(
-                matching: view,
-                as: isScreen ? .image(layout: .device(config: device)) : .image(layout: .sizeThatFits){% if argument.file %},
+                matching: matchingView,
+                as: .wait(
+                    for: delay,
+                    on: .image(
+                        drawHierarchyInKeyWindow: false,
+                        precision: precision,
+                        layout: isScreen ? .device(config: device) : .sizeThatFits
+                    )
+                ){% if argument.file %},
                 file: file{% endif %}
             )
 
             #if canImport(AccessibilitySnapshot)
-                let vc = UIHostingController(rootView: view)
+                let vc = UIHostingController(rootView: matchingView)
                 vc.view.frame = UIScreen.main.bounds
-                assertSnapshot(matching: vc, as: .accessibilityImage(showActivationPoints: .always){% if argument.file %},
-                file: file{% endif %})
+                assertSnapshot(
+                    matching: vc,
+                    as: .wait(
+                        for: delay,
+                        on: .accessibilityImage(showActivationPoints: .always)
+                    ){% if argument.file %},
+                    file: file{% endif %}
+                )
             #endif
         }
     }
@@ -88,3 +116,6 @@ private extension PreviewDevice {
         }
     }
 }
+
+// swiftlint:enable all
+// swiftformat:enable all
