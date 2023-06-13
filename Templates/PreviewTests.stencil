@@ -31,17 +31,16 @@ class PreviewTests: XCTestCase {
 
     {% for type in types.types where type.implements.PrefireProvider or type.based.PrefireProvider or type|annotated:"PrefireProvider" %}
     func test_{{ type.name|lowerFirstLetter|replace:"_Previews", "" }}() {
-        for view in {{ type.name }}._allPreviews {
+        for preview in {{ type.name }}._allPreviews {
             // Given
-            let preview = {{ type.name }}._allPreviews.first
-            let isScreen = preview?.layout == .device
-            let device = preview?.device?.snapshotDevice() ?? deviceConfig
+            let isScreen = preview.layout == .device
+            let device = preview.device?.snapshotDevice() ?? deviceConfig
 
             var delay: TimeInterval = 0.5
             var precision: Float = 1.0
 
             // When
-            var view = view.content
+            let view = preview.content
                 .onPreferenceChange(DelayPreferenceKey.self) {
                     debugPrint("Delay: \($0)")
                     delay = $0
@@ -66,22 +65,24 @@ class PreviewTests: XCTestCase {
                         precision: precision,
                         layout: isScreen ? .device(config: device) : .sizeThatFits
                     )
-                ){% if argument.file %},
+                ),
+                named: preview.displayName{% if argument.file %},
                 file: file{% endif %}
             )
 
-            #if canImport(AccessibilitySnapshot)
-                let vc = UIHostingController(rootView: matchingView)
-                vc.view.frame = UIScreen.main.bounds
-                assertSnapshot(
-                    matching: vc,
-                    as: .wait(
-                        for: delay,
-                        on: .accessibilityImage(showActivationPoints: .always)
-                    ){% if argument.file %},
-                    file: file{% endif %}
-                )
-            #endif
+#if canImport(AccessibilitySnapshot)
+            let vc = UIHostingController(rootView: view)
+            vc.view.frame = UIScreen.main.bounds
+            assertSnapshot(
+                matching: vc,
+                as: .wait(
+                    for: delay,
+                    on: .accessibilityImage(showActivationPoints: .always)
+                ),
+                named: preview.displayName{% if argument.file %},
+                file: file{% endif %}
+            )
+#endif
         }
     }
 
