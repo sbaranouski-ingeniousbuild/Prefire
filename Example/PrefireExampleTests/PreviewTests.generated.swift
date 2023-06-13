@@ -32,49 +32,23 @@ class PreviewTests: XCTestCase {
             let isScreen = preview.layout == .device
             let device = preview.device?.snapshotDevice() ?? deviceConfig
 
-            var delay: TimeInterval = 0.5
-            var precision: Float = 1.0
-
             // When
-            let view = preview.content
-                .onPreferenceChange(DelayPreferenceKey.self) {
-                    debugPrint("Delay: \($0)")
-                    delay = $0
-                }
-                .onPreferenceChange(PrecisionPreferenceKey.self) {
-                    debugPrint("Precision: \($0)")
-                    precision = $0
-                }
-
-            let matchingView = isScreen ? AnyView(view) : AnyView(view
-                .frame(width: device.size?.width)
-                .fixedSize(horizontal: false, vertical: true)
-            )
+            var view = preview.content
+            view = isScreen ? view : AnyView(view.frame(width: device.size?.width).fixedSize(horizontal: false, vertical: true))
 
             // Then
             assertSnapshot(
-                matching: matchingView,
-                as: .wait(
-                    for: delay,
-                    on: .image(
-                        drawHierarchyInKeyWindow: false,
-                        precision: precision,
-                        layout: isScreen ? .device(config: device) : .sizeThatFits
-                    )
-                ),
+                matching: view,
+                as: isScreen ? .image(layout: .device(config: device)) : .image(layout: .sizeThatFits),
                 named: preview.displayName
             )
-
 #if canImport(AccessibilitySnapshot)
             let vc = UIHostingController(rootView: view)
             vc.view.frame = UIScreen.main.bounds
             assertSnapshot(
                 matching: vc,
-                as: .wait(
-                    for: delay,
-                    on: .accessibilityImage(showActivationPoints: .always)
-                ),
-                named: preview.displayName
+                as: .accessibilityImage(showActivationPoints: .always),
+                named: preview.displayName.map { $0 + ".accessibility" }
             )
 #endif
         }
@@ -86,49 +60,23 @@ class PreviewTests: XCTestCase {
             let isScreen = preview.layout == .device
             let device = preview.device?.snapshotDevice() ?? deviceConfig
 
-            var delay: TimeInterval = 0.5
-            var precision: Float = 1.0
-
             // When
-            let view = preview.content
-                .onPreferenceChange(DelayPreferenceKey.self) {
-                    debugPrint("Delay: \($0)")
-                    delay = $0
-                }
-                .onPreferenceChange(PrecisionPreferenceKey.self) {
-                    debugPrint("Precision: \($0)")
-                    precision = $0
-                }
-
-            let matchingView = isScreen ? AnyView(view) : AnyView(view
-                .frame(width: device.size?.width)
-                .fixedSize(horizontal: false, vertical: true)
-            )
+            var view = preview.content
+            view = isScreen ? view : AnyView(view.frame(width: device.size?.width).fixedSize(horizontal: false, vertical: true))
 
             // Then
             assertSnapshot(
-                matching: matchingView,
-                as: .wait(
-                    for: delay,
-                    on: .image(
-                        drawHierarchyInKeyWindow: false,
-                        precision: precision,
-                        layout: isScreen ? .device(config: device) : .sizeThatFits
-                    )
-                ),
+                matching: view,
+                as: isScreen ? .image(layout: .device(config: device)) : .image(layout: .sizeThatFits),
                 named: preview.displayName
             )
-
 #if canImport(AccessibilitySnapshot)
             let vc = UIHostingController(rootView: view)
             vc.view.frame = UIScreen.main.bounds
             assertSnapshot(
                 matching: vc,
-                as: .wait(
-                    for: delay,
-                    on: .accessibilityImage(showActivationPoints: .always)
-                ),
-                named: preview.displayName
+                as: .accessibilityImage(showActivationPoints: .always),
+                named: preview.displayName.map { $0 + ".accessibility" }
             )
 #endif
         }
@@ -140,49 +88,23 @@ class PreviewTests: XCTestCase {
             let isScreen = preview.layout == .device
             let device = preview.device?.snapshotDevice() ?? deviceConfig
 
-            var delay: TimeInterval = 0.5
-            var precision: Float = 1.0
-
             // When
-            let view = preview.content
-                .onPreferenceChange(DelayPreferenceKey.self) {
-                    debugPrint("Delay: \($0)")
-                    delay = $0
-                }
-                .onPreferenceChange(PrecisionPreferenceKey.self) {
-                    debugPrint("Precision: \($0)")
-                    precision = $0
-                }
-
-            let matchingView = isScreen ? AnyView(view) : AnyView(view
-                .frame(width: device.size?.width)
-                .fixedSize(horizontal: false, vertical: true)
-            )
+            var view = preview.content
+            view = isScreen ? view : AnyView(view.frame(width: device.size?.width).fixedSize(horizontal: false, vertical: true))
 
             // Then
             assertSnapshot(
-                matching: matchingView,
-                as: .wait(
-                    for: delay,
-                    on: .image(
-                        drawHierarchyInKeyWindow: false,
-                        precision: precision,
-                        layout: isScreen ? .device(config: device) : .sizeThatFits
-                    )
-                ),
+                matching: view,
+                as: isScreen ? .image(layout: .device(config: device)) : .image(layout: .sizeThatFits),
                 named: preview.displayName
             )
-
 #if canImport(AccessibilitySnapshot)
             let vc = UIHostingController(rootView: view)
             vc.view.frame = UIScreen.main.bounds
             assertSnapshot(
                 matching: vc,
-                as: .wait(
-                    for: delay,
-                    on: .accessibilityImage(showActivationPoints: .always)
-                ),
-                named: preview.displayName
+                as: .accessibilityImage(showActivationPoints: .always),
+                named: preview.displayName.map { $0 + ".accessibility" }
             )
 #endif
         }
@@ -194,49 +116,23 @@ class PreviewTests: XCTestCase {
             let isScreen = preview.layout == .device
             let device = preview.device?.snapshotDevice() ?? deviceConfig
 
-            var delay: TimeInterval = 0.5
-            var precision: Float = 1.0
-
             // When
-            let view = preview.content
-                .onPreferenceChange(DelayPreferenceKey.self) {
-                    debugPrint("Delay: \($0)")
-                    delay = $0
-                }
-                .onPreferenceChange(PrecisionPreferenceKey.self) {
-                    debugPrint("Precision: \($0)")
-                    precision = $0
-                }
-
-            let matchingView = isScreen ? AnyView(view) : AnyView(view
-                .frame(width: device.size?.width)
-                .fixedSize(horizontal: false, vertical: true)
-            )
+            var view = preview.content
+            view = isScreen ? view : AnyView(view.frame(width: device.size?.width).fixedSize(horizontal: false, vertical: true))
 
             // Then
             assertSnapshot(
-                matching: matchingView,
-                as: .wait(
-                    for: delay,
-                    on: .image(
-                        drawHierarchyInKeyWindow: false,
-                        precision: precision,
-                        layout: isScreen ? .device(config: device) : .sizeThatFits
-                    )
-                ),
+                matching: view,
+                as: isScreen ? .image(layout: .device(config: device)) : .image(layout: .sizeThatFits),
                 named: preview.displayName
             )
-
 #if canImport(AccessibilitySnapshot)
             let vc = UIHostingController(rootView: view)
             vc.view.frame = UIScreen.main.bounds
             assertSnapshot(
                 matching: vc,
-                as: .wait(
-                    for: delay,
-                    on: .accessibilityImage(showActivationPoints: .always)
-                ),
-                named: preview.displayName
+                as: .accessibilityImage(showActivationPoints: .always),
+                named: preview.displayName.map { $0 + ".accessibility" }
             )
 #endif
         }
@@ -248,49 +144,23 @@ class PreviewTests: XCTestCase {
             let isScreen = preview.layout == .device
             let device = preview.device?.snapshotDevice() ?? deviceConfig
 
-            var delay: TimeInterval = 0.5
-            var precision: Float = 1.0
-
             // When
-            let view = preview.content
-                .onPreferenceChange(DelayPreferenceKey.self) {
-                    debugPrint("Delay: \($0)")
-                    delay = $0
-                }
-                .onPreferenceChange(PrecisionPreferenceKey.self) {
-                    debugPrint("Precision: \($0)")
-                    precision = $0
-                }
-
-            let matchingView = isScreen ? AnyView(view) : AnyView(view
-                .frame(width: device.size?.width)
-                .fixedSize(horizontal: false, vertical: true)
-            )
+            var view = preview.content
+            view = isScreen ? view : AnyView(view.frame(width: device.size?.width).fixedSize(horizontal: false, vertical: true))
 
             // Then
             assertSnapshot(
-                matching: matchingView,
-                as: .wait(
-                    for: delay,
-                    on: .image(
-                        drawHierarchyInKeyWindow: false,
-                        precision: precision,
-                        layout: isScreen ? .device(config: device) : .sizeThatFits
-                    )
-                ),
+                matching: view,
+                as: isScreen ? .image(layout: .device(config: device)) : .image(layout: .sizeThatFits),
                 named: preview.displayName
             )
-
 #if canImport(AccessibilitySnapshot)
             let vc = UIHostingController(rootView: view)
             vc.view.frame = UIScreen.main.bounds
             assertSnapshot(
                 matching: vc,
-                as: .wait(
-                    for: delay,
-                    on: .accessibilityImage(showActivationPoints: .always)
-                ),
-                named: preview.displayName
+                as: .accessibilityImage(showActivationPoints: .always),
+                named: preview.displayName.map { $0 + ".accessibility" }
             )
 #endif
         }
@@ -302,49 +172,23 @@ class PreviewTests: XCTestCase {
             let isScreen = preview.layout == .device
             let device = preview.device?.snapshotDevice() ?? deviceConfig
 
-            var delay: TimeInterval = 0.5
-            var precision: Float = 1.0
-
             // When
-            let view = preview.content
-                .onPreferenceChange(DelayPreferenceKey.self) {
-                    debugPrint("Delay: \($0)")
-                    delay = $0
-                }
-                .onPreferenceChange(PrecisionPreferenceKey.self) {
-                    debugPrint("Precision: \($0)")
-                    precision = $0
-                }
-
-            let matchingView = isScreen ? AnyView(view) : AnyView(view
-                .frame(width: device.size?.width)
-                .fixedSize(horizontal: false, vertical: true)
-            )
+            var view = preview.content
+            view = isScreen ? view : AnyView(view.frame(width: device.size?.width).fixedSize(horizontal: false, vertical: true))
 
             // Then
             assertSnapshot(
-                matching: matchingView,
-                as: .wait(
-                    for: delay,
-                    on: .image(
-                        drawHierarchyInKeyWindow: false,
-                        precision: precision,
-                        layout: isScreen ? .device(config: device) : .sizeThatFits
-                    )
-                ),
+                matching: view,
+                as: isScreen ? .image(layout: .device(config: device)) : .image(layout: .sizeThatFits),
                 named: preview.displayName
             )
-
 #if canImport(AccessibilitySnapshot)
             let vc = UIHostingController(rootView: view)
             vc.view.frame = UIScreen.main.bounds
             assertSnapshot(
                 matching: vc,
-                as: .wait(
-                    for: delay,
-                    on: .accessibilityImage(showActivationPoints: .always)
-                ),
-                named: preview.displayName
+                as: .accessibilityImage(showActivationPoints: .always),
+                named: preview.displayName.map { $0 + ".accessibility" }
             )
 #endif
         }
@@ -380,6 +224,3 @@ private extension PreviewDevice {
         }
     }
 }
-
-// swiftlint:enable all
-// swiftformat:enable all
