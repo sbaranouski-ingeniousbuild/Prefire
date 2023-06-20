@@ -19,7 +19,9 @@ struct CircleImage: View {
 
 struct CircleImage_Previews: PreviewProvider, PrefireProvider {
     static var previews: some View {
-        CircleImage()
-            .previewLayout(.sizeThatFits)
+        UIElementPreview(
+            CircleImage()
+                .previewLayout(.sizeThatFits)
+        )
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E8BCCDD2A41499B00758304 /* UIElementPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8BCCDC2A41499B00758304 /* UIElementPreview.swift */; };
 		971620D128EEC49A001B8EE3 /* AccessibilitySnapshot in Frameworks */ = {isa = PBXBuildFile; productRef = 971620D028EEC49A001B8EE3 /* AccessibilitySnapshot */; };
 		9735EE38289C5CF300309267 /* PrefireExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9735EE28289C5CF200309267 /* PrefireExampleApp.swift */; };
 		9735EE3C289C5CF300309267 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9735EE2A289C5CF300309267 /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E8BCCDC2A41499B00758304 /* UIElementPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElementPreview.swift; sourceTree = "<group>"; };
 		9735EE28289C5CF200309267 /* PrefireExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefireExampleApp.swift; sourceTree = "<group>"; };
 		9735EE2A289C5CF300309267 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9735EE2F289C5CF300309267 /* PrefireExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrefireExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 				9735EE47289C5E2100309267 /* Examples */,
 				9735EE28289C5CF200309267 /* PrefireExampleApp.swift */,
 				97BA130028A1AAE800CA8F36 /* MainMenu.swift */,
+				6E8BCCDC2A41499B00758304 /* UIElementPreview.swift */,
 				9735EE2A289C5CF300309267 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -197,7 +200,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9735EE26289C5CF200309267 /* Build configuration list for PBXProject "PrefireExample" */;
+			buildConfigurationList = 9735EE26289C5CF200309267 /* Build configuration list for PBXProject "PreFireExample" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -245,6 +248,7 @@
 			files = (
 				97B1477A28EA3CF60014DEC5 /* PrefireView.swift in Sources */,
 				97BA130128A1AAE800CA8F36 /* MainMenu.swift in Sources */,
+				6E8BCCDD2A41499B00758304 /* UIElementPreview.swift in Sources */,
 				9735EE49289C5F3A00309267 /* TestView.swift in Sources */,
 				97B1477828EA335A0014DEC5 /* AuthView.swift in Sources */,
 				9777F17528D0F4200072827B /* CicrleImage.swift in Sources */,
@@ -508,7 +512,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9735EE26289C5CF200309267 /* Build configuration list for PBXProject "PrefireExample" */ = {
+		9735EE26289C5CF200309267 /* Build configuration list for PBXProject "PreFireExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9735EE3E289C5CF300309267 /* Debug */,
