@@ -34,11 +34,11 @@ struct PrefireView: View {
 
 struct PrefireView_Preview: PreviewProvider, PrefireProvider {
     static var previews: some View {
-        UIElementPreview(
+        UIElementPreview {
             PrefireView()
                 .previewLayout(.sizeThatFits)
                 .previewUserStory(.auth)
                 .previewDisplayName("PrefireView")
-        )
+        }
     }
 }

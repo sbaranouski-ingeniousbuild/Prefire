@@ -72,12 +72,12 @@ struct TestView_Previews: PreviewProvider, PrefireProvider {
 
 struct TestViewWithoutState_Previews: PreviewProvider, PrefireProvider {
     static var previews: some View {
-        UIElementPreview(
+        UIElementPreview {
             TestView(isLoading: true)
                 .previewUserStory(.testStory)
                 .snapshot(delay: 0.1, precision: 0.9)
                 .previewLayout(.sizeThatFits)
-        )
+        }
     }
 }
 

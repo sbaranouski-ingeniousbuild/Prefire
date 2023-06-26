@@ -16,13 +16,13 @@ import Prefire
 
 internal class ProgramModuleViewPreview: PreviewProvider, PrefireProvider {
     static var previews: some View {
-        UIElementPreview(
+        UIElementPreview {
             ViewRepresentable(
                 view: NatureView()
             )
             .frame(width: 512, height: 512)
             .previewLayout(.sizeThatFits)
-        )
+        }
     }
 }
 
