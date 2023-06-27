@@ -1,5 +1,6 @@
 #if DEBUG
 import SwiftUI
+import Prefire
 
 public struct UIElementPreview<Content: View>: View {
     
@@ -21,18 +22,21 @@ public struct UIElementPreview<Content: View>: View {
                     .previewLayout(PreviewLayout.sizeThatFits)
                     .environment(\.locale, locale)
                     .previewDisplayName(Locale.current.localizedString(forIdentifier: locale.identifier))
+                    .snapshot(delay: 1.0, precision: 0.8)
             }
             
             self.viewToPreview()
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .environment(\.colorScheme, .dark)
                 .previewDisplayName("Dark Mode")
-            
+                .snapshot(delay: 1.0, precision: 0.8)
+
             ForEach(dynamicTypeSizes, id: \.self) { sizeCategory in
                 self.viewToPreview()
                     .previewLayout(PreviewLayout.sizeThatFits)
                     .environment(\.sizeCategory, sizeCategory)
                     .previewDisplayName("\(sizeCategory)")
+                    .snapshot(delay: 1.0, precision: 0.8)
             }
         }
     }

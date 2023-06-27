@@ -16,7 +16,7 @@ import SnapshotTesting
 
 class PreviewTests: XCTestCase {
     private let deviceConfig: ViewImageConfig = .iPhoneX
-    private let simulatorDevice = "iPhone15,2"
+    private let simulatorDevice = "iPhone13,2"
     private let requiredOSVersion = 16
 
     override func setUp() {
@@ -58,6 +58,14 @@ class PreviewTests: XCTestCase {
         }
     }
 
+    func test_programModuleViewPreview() {
+        let previews = ProgramModuleViewPreview.previews
+        for (index, preview) in ProgramModuleViewPreview._allPreviews.enumerated() {
+            let settings = previews.snapshotSettings(for: index)
+            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay)
+        }
+    }
+
     func test_testViewWithoutState() {
         let previews = TestViewWithoutState_Previews.previews
         for (index, preview) in TestViewWithoutState_Previews._allPreviews.enumerated() {
@@ -93,7 +101,7 @@ class PreviewTests: XCTestCase {
             vc.view.frame = UIScreen.main.bounds
             assertSnapshot(
                 matching: vc,
-                as: .wait(for: delay, on: .accessibilityImage(showActivationPoints: .always)),
+                as: .accessibilityImage(showActivationPoints: .always),
                 named: preview.displayName.map { $0 + ".accessibility" },
                 testName: testName
             )
