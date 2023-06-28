@@ -18,6 +18,7 @@ class PreviewTests: XCTestCase {
     private let deviceConfig: ViewImageConfig = .iPhoneX
     private let simulatorDevice = "iPhone15,2"
     private let requiredOSVersion = 16
+    private let defaultDelay = 0.5
 
     override func setUp() {
         super.setUp()
@@ -30,7 +31,7 @@ class PreviewTests: XCTestCase {
         let previews = AuthView_Preview.previews
         for (index, preview) in AuthView_Preview._allPreviews.enumerated() {
             let settings = previews.snapshotSettings(for: index)
-            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay)
+            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay ?? defaultDelay)
         }
     }
 
@@ -38,7 +39,7 @@ class PreviewTests: XCTestCase {
         let previews = CircleImage_Previews.previews
         for (index, preview) in CircleImage_Previews._allPreviews.enumerated() {
             let settings = previews.snapshotSettings(for: index)
-            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay)
+            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay ?? defaultDelay)
         }
     }
 
@@ -46,7 +47,7 @@ class PreviewTests: XCTestCase {
         let previews = GreenButton_Previews.previews
         for (index, preview) in GreenButton_Previews._allPreviews.enumerated() {
             let settings = previews.snapshotSettings(for: index)
-            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay)
+            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay ?? defaultDelay)
         }
     }
 
@@ -54,7 +55,7 @@ class PreviewTests: XCTestCase {
         let previews = PrefireView_Preview.previews
         for (index, preview) in PrefireView_Preview._allPreviews.enumerated() {
             let settings = previews.snapshotSettings(for: index)
-            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay)
+            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay ?? defaultDelay)
         }
     }
 
@@ -62,7 +63,7 @@ class PreviewTests: XCTestCase {
         let previews = TestViewWithoutState_Previews.previews
         for (index, preview) in TestViewWithoutState_Previews._allPreviews.enumerated() {
             let settings = previews.snapshotSettings(for: index)
-            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay)
+            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay ?? defaultDelay)
         }
     }
 
@@ -70,7 +71,7 @@ class PreviewTests: XCTestCase {
         let previews = TestView_Previews.previews
         for (index, preview) in TestView_Previews._allPreviews.enumerated() {
             let settings = previews.snapshotSettings(for: index)
-            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay)
+            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay ?? defaultDelay)
         }
     }
 

@@ -17,6 +17,7 @@ class PreviewTests: XCTestCase {
     private let deviceConfig: ViewImageConfig = .iPhoneX
     private let simulatorDevice = "{{ argument.simulatorDevice|default:"iPhone15,2" }}"
     private let requiredOSVersion = {{ argument.simulatorOSVersion|default:"16" }}
+    private let defaultDelay = 0.5
     {% if argument.file %}
 
     private var file: StaticString { .init(stringLiteral: "{{ argument.file }}") }
@@ -34,7 +35,7 @@ class PreviewTests: XCTestCase {
         let previews = {{ type.name }}.previews
         for (index, preview) in {{ type.name }}._allPreviews.enumerated() {
             let settings = previews.snapshotSettings(for: index)
-            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay)
+            assertSnapshots(matching: preview, precision: settings.precision, delay: settings.delay ?? defaultDelay)
         }
     }
 
