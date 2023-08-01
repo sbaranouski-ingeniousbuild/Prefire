@@ -106,6 +106,12 @@ extension Command {
             "simulatorOSVersion=\(configuration?.requiredOSVersion ?? defaultOSVersion)",
         ]
 
+        configuration?.args?
+            .forEach { key, values in
+                // let valuesString = values.joined(separator: ",")
+                arguments.append(contentsOf: ["--args", "\(key)=\(values)"])
+            }
+
         if configuration?.testFilePath == nil {
             arguments.append(contentsOf: [
                 "--args", "file=\(testTargetPath)/PreviewTests.swift"

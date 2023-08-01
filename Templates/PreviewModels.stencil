@@ -7,6 +7,12 @@ import Prefire
 {% if argument.mainTarget %}
 @testable import {{ argument.mainTarget }}
 {% endif %}
+{% for import in argument.testable %}
+@testable import {{ import }}
+{% endfor %}
+{% for import in argument.import %}
+import {{ import }}
+{% endfor %}
 
 public enum PreviewModels {
     public static var models: [PreviewModel] = {

@@ -12,6 +12,7 @@ struct PrefirePlaybookPlugin: BuildToolPlugin {
             Command.prefireCommand(
                 executablePath: executable,
                 sources: target.directory,
+                imports: target.recursiveTargetDependencies.map(\.name),
                 generatedSourcesDirectory: context.pluginWorkDirectory)
         ]
     }
@@ -30,6 +31,7 @@ extension PrefirePlaybookPlugin: XcodeBuildToolPlugin {
             Command.prefireCommand(
                 executablePath: executable,
                 sources: context.xcodeProject.directory,
+                imports: [],
                 generatedSourcesDirectory: context.pluginWorkDirectory)
         ]
     }
@@ -42,6 +44,7 @@ extension Command {
     static func prefireCommand(
         executablePath executable: Path,
         sources: Path,
+        imports: [String],
         generatedSourcesDirectory: Path
     ) -> Command {
         Diagnostics.remark(
@@ -62,6 +65,8 @@ extension Command {
                 "\(templatesDirectory)/PreviewModels.stencil",
                 "--sources",
                 sources.string,
+                "--args",
+                "autoMockableImports=\(imports)",
                 "--output",
                 "\(generatedSourcesDirectory)/PreviewModels.generated.swift",
                 "--cacheBasePath",
